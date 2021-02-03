@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+body {
+    background-color: #888;
+}
+.gifs-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    margin: 100px 50px 50px;
+}
+.main {
+    z-index:0
+}
+form {
+    display: felx;
+    flex-direction: column;
+    width: 200px;
+    margin: 20px auto;
+}
+input {
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.endText {
+    text-align: center;
+}
