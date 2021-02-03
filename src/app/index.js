@@ -5,33 +5,36 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Popup from './components/Popup';
 
 function App() {
-
+    
     const [gifs, setGifs] = useState([])
     const [keyword, setKeyword] = useState('')
     const [error, setError] = useState('')
-    const [gifsCount, setGifsCount] = useState(12)
+    const [gifsCount, setGifsCount] = useState(0)
     const [moreGifs, setMoreGifs] = useState(true)
     const [selectedGif, setSelectedGif] = useState({})
     const [selectedGifBoxVisibility, setSelectedGifBoxVisibility] = useState(false)
-
+    
     const giphyQuery = "https://api.giphy.com/v1/gifs/search?q=" + keyword + "&limit=" + gifsCount + "&api_key=qcxxaTUykVLrYTfCEUFXcNVowsiVteTH"
+    
+    
+    useEffect(() =>{
+        console.log(gifsCount)
+        if (keyword.match(/^[0-9a-zA-Z]+$/)) {
+            fetch(giphyQuery)
+                .then(res => res.json())
+                .then(data => setGifs(data.data))
+                setError('')
+            } else if (gifsCount > 0)
+            {
+                setError('Only letters and numbers allowed, sir.')
+            }
+    },[gifsCount])
 
     const submit = e => {
         e.preventDefault()
-        if (keyword.match(/^[0-9a-zA-Z]+$/)) {
-            fetch(giphyQuery,
-                {
-                    headers: {
-                        'Content-Type': 'text/html'
-                    }
-                }
-            )
-                .then(res => res.json())
-                .then(data => setGifs(data.data))
-            setError('')
-        } else {
-            setError('Only letters and numbers allowed, sir.')
-        }
+        setGifsCount(12);
+        setMoreGifs(true);
+        console.log('submit')
     }
 
     const handleChange = (e) => {
@@ -39,18 +42,16 @@ function App() {
     };
 
     const fetchMoreData = () => {
-        if (gifsCount > 48) {
-            setMoreGifs(false);
-            return;
-        } else {
-            setGifsCount(gifsCount + 12)
-        }
-
+       console.log('fechMoreData')
         setTimeout(() => {
-            fetch(giphyQuery)
-                .then(res => res.json())
-                .then(data => setGifs(data.data))
+            if (gifsCount >= 48) {
+                setMoreGifs(false);
+                return;
+            } else {
+                setGifsCount(gifsCount + 12)
+            }
         }, 1000);
+       
     };
 
 
@@ -63,7 +64,7 @@ function App() {
                 selectedGifBoxVisibility={selectedGifBoxVisibility}
             />
             <main className='main'>
-                <form onSubmit={submit}>
+                <form onSubmit={(e) => submit(e)}>
                     <label>Search
                         <input name="keyword" type="text" placeholder="Enter word"
                             value={keyword}
