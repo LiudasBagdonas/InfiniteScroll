@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Popup from './components/Popup';
 
 function App() {
-    
+
     const [gifs, setGifs] = useState([])
     const [keyword, setKeyword] = useState('')
     const [error, setError] = useState('')
@@ -13,47 +13,42 @@ function App() {
     const [moreGifs, setMoreGifs] = useState(true)
     const [selectedGif, setSelectedGif] = useState({})
     const [selectedGifBoxVisibility, setSelectedGifBoxVisibility] = useState(false)
-    
+    const [toggle, setToggle] = useState(true)
+
     const giphyQuery = "https://api.giphy.com/v1/gifs/search?q=" + keyword + "&limit=" + gifsCount + "&api_key=qcxxaTUykVLrYTfCEUFXcNVowsiVteTH"
-    
-    
-    useEffect(() =>{
-        console.log(gifsCount)
+
+    useEffect(() => {
         if (keyword.match(/^[0-9a-zA-Z]+$/)) {
             fetch(giphyQuery)
                 .then(res => res.json())
                 .then(data => setGifs(data.data))
-                setError('')
-            } else if (gifsCount > 0)
-            {
-                setError('Only letters and numbers allowed, sir.')
-            }
-    },[gifsCount])
+            setError('')
+        } else if (gifsCount > 0 && !keyword.match(/^[0-9a-zA-Z]+$/)) {
+            setError('Only letters and numbers allowed, sir.')
+        }
+
+    }, [toggle, gifsCount])
 
     const submit = e => {
         e.preventDefault()
-        setGifsCount(12);
         setMoreGifs(true);
-        console.log('submit')
+        setGifsCount(12);
+        setError('')
+        setToggle(!toggle)
     }
 
-    const handleChange = (e) => {
-        setKeyword(e.target.value);
-    };
-
     const fetchMoreData = () => {
-       console.log('fechMoreData')
         setTimeout(() => {
             if (gifsCount >= 48) {
                 setMoreGifs(false);
                 return;
             } else {
                 setGifsCount(gifsCount + 12)
+                setMoreGifs(true);
             }
         }, 1000);
-       
-    };
 
+    };
 
     return (
         <div className="App">
@@ -65,11 +60,12 @@ function App() {
             />
             <main className='main'>
                 <form onSubmit={(e) => submit(e)}>
-                    <label>Search
+                    <label>
                         <input name="keyword" type="text" placeholder="Enter word"
                             value={keyword}
-                            onChange={(e) => handleChange(e, "keyword")} />
+                            onChange={(e) => setKeyword(e.target.value)} />
                     </label>
+                    <button>Search</button>
                 </form>
                 {error === '' ? '' : <p>{error}</p>}
                 <InfiniteScroll
@@ -77,7 +73,7 @@ function App() {
                     next={fetchMoreData}
                     hasMore={moreGifs}
                     endMessage={
-                        <p className='endText'>Thats it, folks!</p>
+                        <p className='end-text'>Thats it, folks!</p>
                     }
                 >
                     <section className='gifs-section'>

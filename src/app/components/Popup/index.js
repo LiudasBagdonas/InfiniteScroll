@@ -6,10 +6,10 @@ function Popup({ setSelectedGif, selectedGif, setSelectedGifBoxVisibility, selec
     return (
         selectedGifBoxVisibility ?
             <div className='popup'>
-                <div className='closebtn' onClick={() => { setSelectedGifBoxVisibility(false) }}>Close</div>
-                <div className='img-box'>
-                    <iframe className='selectedGif' src={selectedGif.url} alt={selectedGif.title}></iframe>
-                    <div className='invisibleLayer'></div>
+                <div className='close-btn' onClick={() => { setSelectedGifBoxVisibility(false) }}>Close</div>
+                <div className='popup-img-box'>
+                    <iframe className='selected-gif' src={selectedGif.url} alt={selectedGif.title}></iframe>
+                    <div className='invisible-layer'></div>
                 </div>
             </div> :
             ''

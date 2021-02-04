@@ -5,15 +5,15 @@ function GifBox({ title, url, setSelectedGif, setSelectedGifBoxVisibility }) {
 
     return (
        
-            <div className='imgBox' >
-                <div className='eventBox'
+            <div className='img-box' >
+                <div className='event-box'
                     onClick={() => {
                         setSelectedGifBoxVisibility(true);
                         setSelectedGif({ url, title });
                     }}
                 >
                 </div>
-                <iframe className='smallGif' src={url} alt={title} />
+                <iframe className='small-gif' src={url} alt={title} />
             </div>
         
     );

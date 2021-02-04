@@ -17,10 +17,23 @@ body {
     z-index:0
 }
 form {
-    display: felx;
-    flex-direction: column;
+    display: flex;
     width: 200px;
     margin: 20px auto;
+
+}
+form button {
+    margin: 10px;
+    border: none;
+    outline: none;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;   
+}
+
+form button:active {
+    background-color: darkgray;
 }
 input {
     padding: 10px;
@@ -29,6 +42,6 @@ input {
     border-radius: 10px;
     margin-top: 10px;
 }
-.endText {
+.end-text {
     text-align: center;
 }

@@ -5,7 +5,7 @@
     font-weight: bold;
 }
 
-.closebtn {
+.close-btn {
     height: 40px;
     width: 40px;
     font-size: 30px;
@@ -26,7 +26,7 @@
 }
 
 
-.img-box {
+.popup-img-box {
     z-index: 1;
     height: 50%;
     width: 50%;
@@ -37,13 +37,16 @@
     align-items: center;
     justify-content: center;
 }
-.selectedGif {
+.selected-gif {
+    width: 80%;
     height: 100%;
-    max-width: 500px;
+    object-fit: cover;
+
+    /* max-width: 500px; */
     border: 0px;
     z-index: -1;
 }
-.invisibleLayer {
+.invisible-layer {
     z-index: 1;
     position: absolute;
     top: 0;
