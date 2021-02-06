@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scss';
 
 function Popup({ setSelectedGif, selectedGif, setSelectedGifBoxVisibility, selectedGifBoxVisibility }) {
 
@@ -8,7 +8,7 @@ function Popup({ setSelectedGif, selectedGif, setSelectedGifBoxVisibility, selec
             <div className='popup'>
                 <div className='close-btn' onClick={() => { setSelectedGifBoxVisibility(false) }}>Close</div>
                 <div className='popup-img-box'>
-                    <iframe className='selected-gif' src={selectedGif.url} alt={selectedGif.title}></iframe>
+                    <iframe className='selected-gif' src={selectedGif.url} alt={selectedGif.title} title={selectedGif.title}></iframe>
                     <div className='invisible-layer'></div>
                 </div>
             </div> :

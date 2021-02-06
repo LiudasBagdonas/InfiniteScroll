@@ -1,5 +1,4 @@
-import './index.css';
-import { useState } from 'react';
+import './index.scss';
 
 function GifBox({ title, url, setSelectedGif, setSelectedGifBoxVisibility }) {
 
@@ -13,7 +12,7 @@ function GifBox({ title, url, setSelectedGif, setSelectedGifBoxVisibility }) {
                     }}
                 >
                 </div>
-                <iframe className='small-gif' src={url} alt={title} />
+                <iframe className='small-gif' src={url} alt={title} title={title}/>
             </div>
         
     );

@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scss';
 import { useState, useEffect } from 'react';
 import GifBox from './components/GifBox';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -31,10 +31,14 @@ function App() {
 
     const submit = e => {
         e.preventDefault()
-        setMoreGifs(true);
-        setGifsCount(12);
-        setError('')
-        setToggle(!toggle)
+        if (keyword !== '') {
+            setMoreGifs(true);
+            setGifsCount(12);
+            setError('')
+            setToggle(!toggle)
+        } else {
+            setError('Nothing entered.')
+        }
     }
 
     const fetchMoreData = () => {
@@ -76,7 +80,7 @@ function App() {
                         <p className='end-text'>Thats it, folks!</p>
                     }
                 >
-                    <section className='gifs-section'>
+                    <section className={`gifs-section error--${error !== '' ? 'true' : 'false'}`}>
                         {gifs.map((gif) => (
                             <GifBox
                                 setSelectedGif={setSelectedGif}
