@@ -67,7 +67,7 @@ function App() {
                     </label>
                     <button>Search</button>
                 </form>
-                {error === '' ? '' : <p>{error}</p>}
+                {error === '' ? '' : <p className='search-error'>{error}</p>}
                 <InfiniteScroll
                     dataLength={gifsCount}
                     next={fetchMoreData}
