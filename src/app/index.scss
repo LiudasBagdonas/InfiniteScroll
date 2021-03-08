@@ -5,7 +5,15 @@
 	font-weight: bold;
 }
 body {
-	background-color: #888;
+	background-image: linear-gradient(rgb(49, 187, 187), rgb(43, 68, 78));
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+}
+h1 {
+	color: #222;
+	text-align: center;
+	font-size: 25px;
+	margin-top: 20px;
 }
 .gifs-section {
 	display: grid;

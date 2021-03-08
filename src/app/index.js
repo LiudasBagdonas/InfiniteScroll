@@ -23,19 +23,22 @@ function App() {
                 .then(res => res.json())
                 .then(data => setGifs(data.data))
             setError('')
-        } else if (gifsCount > 0 && !keyword.match(/^[0-9a-zA-Z]+$/)) {
+        } else if (gifsCount > 0 && !keyword.match(/^[0-9a-zA-Z]+$/) && keyword !== '') {
             setError('Only letters and numbers allowed, sir.')
         }
 
-    }, [toggle, gifsCount])
+    }, [keyword, gifsCount])
 
     const submit = e => {
         e.preventDefault()
-        if (keyword !== '') {
+        let inputValue = document.getElementById('searchInput').value
+        
+        if (inputValue !== '') {
             setMoreGifs(true);
             setGifsCount(12);
             setError('')
             setToggle(!toggle)
+            setKeyword(inputValue)
         } else {
             setError('Nothing entered.')
         }
@@ -63,11 +66,10 @@ function App() {
                 selectedGifBoxVisibility={selectedGifBoxVisibility}
             />
             <main className='main'>
+                <h1>Find your gif</h1>
                 <form onSubmit={(e) => submit(e)}>
                     <label>
-                        <input name="keyword" type="text" placeholder="Enter word"
-                            value={keyword}
-                            onChange={(e) => setKeyword(e.target.value)} />
+                        <input id="searchInput" name="keyword" type="text" placeholder="Enter word"/>
                     </label>
                     <button>Search</button>
                 </form>
